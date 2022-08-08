@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Word Relay Game</title>
+    </head>
+
+    <body>
+        <div><span id="order">1</span>번째 참가자</div>
+        <div>제시어: <span id="word"></span></div>
+        <input type="text">
+        <button>입력</button>
+
+        <script>
+            const number = Number(prompt('몇 명이 참가하나요?'));
+            const tag_button = document.querySelector('button');
+            const tag_input = document.querySelector('input');
+            const tag_word = document.querySelector('#word');
+            const tag_order = document.querySelector('#order');
+            // 단어를 입력할 때마다 바뀌므로 const 대신 let을 사용
+            let word;
+            let new_word;
+
+            tag_input.focus();
+
+            // 새로운 단어로 변경해서 화면에 보여줌
+            function set_word() {
+                word = new_word;
+                tag_word.textContent = word;
+            }
+
+            // 순번 변경해서 화면에 보여줌
+            function set_order() {
+                const order = Number(tag_order.textContent);
+                if (order + 1 > number) {
+                    tag_order.textContent = 1;
+                } else {
+                    tag_order.textContent = order + 1;
+                }
+            }
+
+            // 입력 값 초기화
+            function init_input() {
+                tag_input.value = "";
+                tag_input.focus();
+            }
+            
+            // 버튼을 클릭 했을 때
+            const on_click_button = () => {                
+                if (!word || word[word.length-1] === new_word[0]) {
+                    set_word();
+                    set_order();
+                } else {
+                    alert('올바르지 않은 단어 입니다.')
+                }
+
+                init_input();
+            };
+            
+            // 단어를 입력하면 새로운 단어로 저장
+            const on_input = (event) => {
+                new_word = event.target.value;
+            };
+
+            // 이벤트를 추가하고 함수 호출
+            tag_button.addEventListener('click', on_click_button);
+            tag_input.addEventListener('input', on_input);
+        </script>
+    </body>
+</html>
