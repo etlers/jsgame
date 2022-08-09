@@ -48,11 +48,10 @@
             // 버튼을 클릭 했을 때
             const on_click_button = () => {   
                 console.log(word)             
-                if (!word && word.length === 3) {
-                    set_word();
+                if (word.length === 3) {
                     set_order();
                 } else {
-                    alert('올바르지 않은 단어 입니다.')
+                    alert('올바르지 않은 단어 입니다. 다시 입력해 주세요.')
                 }
 
                 init_input();
@@ -60,7 +59,8 @@
             
             // 단어를 입력하면 새로운 단어로 저장
             const on_input = (event) => {
-                new_word = event.target.value;
+                tag_word.textContent = event.target.value;
+                word = event.target.value;
             };
 
             // 이벤트를 추가하고 함수 호출
